@@ -58,12 +58,7 @@ const Consumer = async () => {
         messagee = 'successs';
       }
       console.log(messagee);
-      // res.status(201).json({
-      //   status: 'successs',
-      //   data: {
-      //     data: 'data',
-      //   },
-      // });
+
       res.seb;
       message.ack();
     });
