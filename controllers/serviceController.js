@@ -65,54 +65,54 @@ exports.careteService = async (req, res) => {
           consumerGroup: 'anik',
         });
 
-        // consumer.on('message', async (message) => {
-        //   console.log(message.getData().toString());
-        //   const a = message.getData().toString();
-        //   const lexedReview = aposToLexForm(a);
-        //   const spellCorrector = new SpellCorrector();
-        //   spellCorrector.loadDictionary();
-        //   const casedReview = lexedReview.toLowerCase();
-        //   const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');
-        //   //console.log("Helloo",alphaOnlyReview)
-        //   const { WordTokenizer } = natural;
-        //   const tokenizer = new WordTokenizer();
-        //   const tokenizedReview = tokenizer.tokenize(alphaOnlyReview);
-        //   //console.log("Helloo",tokenizedReview)
-        //   tokenizedReview.forEach((word, index) => {
-        //     tokenizedReview[index] = spellCorrector.correct(word);
-        //   });
-        //   const filteredReview = SW.removeStopwords(tokenizedReview);
+        consumer.on('message', async (message) => {
+          console.log(message.getData().toString());
+          const a = message.getData().toString();
+          const lexedReview = aposToLexForm(a);
+          const spellCorrector = new SpellCorrector();
+          spellCorrector.loadDictionary();
+          const casedReview = lexedReview.toLowerCase();
+          const alphaOnlyReview = casedReview.replace(/[^a-zA-Z\s]+/g, '');
+          //console.log("Helloo",alphaOnlyReview)
+          const { WordTokenizer } = natural;
+          const tokenizer = new WordTokenizer();
+          const tokenizedReview = tokenizer.tokenize(alphaOnlyReview);
+          //console.log("Helloo",tokenizedReview)
+          tokenizedReview.forEach((word, index) => {
+            tokenizedReview[index] = spellCorrector.correct(word);
+          });
+          const filteredReview = SW.removeStopwords(tokenizedReview);
 
-        //   const { SentimentAnalyzer, PorterStemmer } = natural;
-        //   const analyzer = new SentimentAnalyzer(
-        //     'English',
-        //     PorterStemmer,
-        //     'afinn',
-        //   );
+          const { SentimentAnalyzer, PorterStemmer } = natural;
+          const analyzer = new SentimentAnalyzer(
+            'English',
+            PorterStemmer,
+            'afinn',
+          );
 
-        //   const analysis = analyzer.getSentiment(filteredReview);
-        //   let messagee;
+          const analysis = analyzer.getSentiment(filteredReview);
+          let messagee;
 
-        //   if (analysis < 0) {
-        //     messagee = 'failed';
-        //   } else {
-        //     await Service.create({ post });
-        //     messagee = 'successs';
-        //   }
-        //   console.log(messagee);
-        //   // res.status(201).json({
-        //   //   status: 'successs',
-        //   //   data: {
-        //   //     data: 'data',
-        //   //   },
-        //   // });
-        //   res.seb;
-        //   message.ack();
-        // });
-        Consumer();
-        // consumer.on('error', (error) => {
-        //   console.log(error);
-        // });
+          if (analysis < 0) {
+            messagee = 'failed';
+          } else {
+            await Service.create({ post });
+            messagee = 'successs';
+          }
+          console.log(messagee);
+          // res.status(201).json({
+          //   status: 'successs',
+          //   data: {
+          //     data: 'data',
+          //   },
+          // });
+          res.seb;
+          message.ack();
+        });
+        //Consumer();
+        consumer.on('error', (error) => {
+          console.log(error);
+        });
       } catch (ex) {
         console.log(ex);
         memphis.close();
