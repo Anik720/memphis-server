@@ -14,7 +14,7 @@ services:
     networks:
       - memphis
     ports:
-      - "7766:4222"
+      - "2000:4222"
     command: >
       -js --auth=memphis
   control-plane:

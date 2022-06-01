@@ -1,6 +1,6 @@
 const memphis = require('memphis-dev');
 const natural = require('natural');
-
+const Service = require('../models/serviceModel');
 const SpellCorrector = require('spelling-corrector');
 const aposToLexForm = require('apos-to-lex-form');
 const SW = require('stopword');
@@ -9,21 +9,16 @@ const Consumer = async () => {
   try {
     await memphis.connect({
       host: 'localhost',
-      port: '5665', // defaults to 6666. Can be removed
-      brokerHost: 'localhost',
-      brokerPort: '5765', // defaults to 7766. Can be removed
-      username: 'kibria', // (application type user)
+
+      username: 'Karim', // (application type user)
       connectionToken: 'memphis', // you will get it on application type user creation
-      reconnect: true, // defaults to false
-      maxReconnect: 10, // defaults to 10
-      reconnectIntervalMs: 1500, // defaults to 1500
-      timeoutMs: 1500,
+      dataPort: 2000,
     });
     const spellCorrector = new SpellCorrector();
     spellCorrector.loadDictionary();
     const consumer = await memphis.consumer({
-      stationName: 'banny',
-      consumerName: 'Kibriaa',
+      stationName: 'darun',
+      consumerName: 'Kibria',
       consumerGroup: 'anik',
     });
 
@@ -71,5 +66,5 @@ const Consumer = async () => {
     memphis.close();
   }
 };
-
+//Consumer();
 module.exports = Consumer;
